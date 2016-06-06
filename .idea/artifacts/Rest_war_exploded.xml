@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Rest:war exploded">
+    <output-path>$PROJECT_DIR$/target/Rest</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Rest" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.18.1" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.18.1" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-servlet:1.18.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/Rest/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Rest/web/Web" />
+    </root>
+  </artifact>
+</component>
