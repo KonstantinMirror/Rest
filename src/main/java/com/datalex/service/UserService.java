@@ -17,8 +17,9 @@ public class UserService {
 
     @GET
     @Path("/users")
-    @Produces(MediaType.APPLICATION_XML)
-    public List<User> getUsers(){
-        return userDao.getAllUsers();
+   // @Produces(MediaType.APPLICATION_XML)
+    public String getUsers(){
+       // return userDao.getAllUsers();
+        return "Rest service is work";
     }
 }
