@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 @XmlRootElement(name = "customer", namespace = "com.datalex.bean")
 public class Customer  implements Serializable{
+    private Long ID;
     private String name;
     private String email;
     private String phone;
@@ -12,10 +13,19 @@ public class Customer  implements Serializable{
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone) {
+    public Customer(Long id, String name, String email, String phone) {
+        this.ID = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
     public String getName() {

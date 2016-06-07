@@ -17,8 +17,8 @@ public class CustomerService {
     @Path("/customers")
     public Response getCustomers(){
         Customers customers =  new Customers();
-        customers.getCustomerList().add(new Customer("nick", "12@2", "222555"));
-        customers.getCustomerList().add(new Customer("nick", "12@2", "222555"));
+        customers.getCustomerList().add(new Customer(1L,"nick", "12@2", "222555"));
+        customers.getCustomerList().add(new Customer(1L,"nick", "12@2", "222555"));
         return Response.ok(customers).build();
     }
 
@@ -27,11 +27,11 @@ public class CustomerService {
     public Response getCustomerById(@PathParam("customerId") Long customerId){
         System.out.println("get");
         System.out.println(customerId);
-        return Response.ok(new Customer("nick","12@2","222555")).build();
+        return Response.ok(new Customer(1L,"nick","12@2","222555")).build();
     }
 
     @DELETE
-    @Path("{customerId}")
+    @Path("{customerId}" )
 
     public Response deleteCustomer(@PathParam("customerId") Long customerId){
         System.out.println("delete");
