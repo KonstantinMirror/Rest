@@ -4,7 +4,6 @@ package com.datalex.dao.db;
 import com.datalex.bean.Customer;
 import com.datalex.bean.Customers;
 import com.datalex.dao.ICustomerDAO;
-import com.datalex.logging.bean.User;
 
 import java.sql.*;
 
@@ -39,7 +38,26 @@ public class DbDao implements ICustomerDAO {
 
     @Override
     public Customer updateCustomerById(Customer customer) {
-        return null;
+        Connection con = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            con = DButility.getConnection();
+            statement = con.prepareStatement("UPDATE flight.customers SET  name = ?, email = ?, phone = ? " +
+                    " WHERE id = ? ");
+            statement.setString(1, customer.getName());
+            statement.setString(2, customer.getEmail());
+            statement.setString(3, customer.getPhone());
+            statement.setLong(4, customer.getID());
+            result = statement.executeQuery();
+            return customer;
+        } catch (SQLException e) {
+            throw new IllegalStateException("Problem with DB", e);
+        } finally {
+            DButility.closeResultSet(result);
+            DButility.closeStatement(statement);
+            DButility.closeConnection(con);
+        }
     }
 
     @Override
@@ -100,6 +118,8 @@ public class DbDao implements ICustomerDAO {
             statement.setString(2, customer.getEmail());
             statement.setString(3, customer.getPhone());
             result = statement.executeQuery();
+            customer.setID(getId(con));
+            return customer;
         } catch (SQLException e) {
             throw new IllegalStateException("Problem with DB", e);
         } finally {
@@ -108,11 +128,25 @@ public class DbDao implements ICustomerDAO {
             DButility.closeConnection(con);
         }
     }
-    return null;
-}
+
 
     private Long getId(Connection connection) {
-
-
+        Connection con = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try {
+            con = DButility.getConnection();
+            statement = con.prepareStatement("SELECT LAST_INSERT_ID()");
+            result = statement.executeQuery();
+            result.next();
+            return result.getLong("id");
+        } catch (SQLException e) {
+            throw new IllegalStateException("Problem with DB", e);
+        } finally {
+            DButility.closeResultSet(result);
+            DButility.closeStatement(statement);
+            DButility.closeConnection(con);
+        }
 
     }
+}
