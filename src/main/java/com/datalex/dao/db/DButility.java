@@ -10,12 +10,17 @@ public final class DButility {
         Properties properties =new Properties();
         properties.setProperty("user","jse");
         properties.setProperty("password","jse");
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException("Problem with connect");
+        }
         Connection connection = DriverManager.getConnection(URL + BASE_NAME, properties);
         return connection;
     }
 
     private static final String URL = "jdbc:mysql://localhost:3306/";
-    private static final String BASE_NAME = "customers";
+    private static final String BASE_NAME = "flight";
 
 
 

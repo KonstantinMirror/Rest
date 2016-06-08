@@ -1,9 +1,9 @@
-package com.datalex.bean;
+package com.datalex.entity;
 
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-@XmlRootElement(name = "customer", namespace = "com.datalex.bean")
+@XmlRootElement(name = "customer", namespace = "com.datalex.entity")
 public class Customer  implements Serializable{
     private Long ID;
     private String name;

@@ -1,10 +1,10 @@
-package com.datalex.bean;
+package com.datalex.entity;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement(namespace = "com.datalex.bean")
+@XmlRootElement(namespace = "com.datalex.entity")
 @XmlSeeAlso(Customer.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Customers {

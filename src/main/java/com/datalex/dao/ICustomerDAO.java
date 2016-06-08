@@ -1,8 +1,8 @@
 package com.datalex.dao;
 
 
-import com.datalex.bean.Customer;
-import com.datalex.bean.Customers;
+import com.datalex.entity.Customer;
+import com.datalex.entity.Customers;
 
 public interface ICustomerDAO {
     Customer getCustomerById(Long id);

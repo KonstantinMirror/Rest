@@ -1,7 +1,9 @@
 package com.datalex.service;
 
-import com.datalex.bean.Customer;
-import com.datalex.bean.Customers;
+import com.datalex.entity.Customer;
+import com.datalex.entity.Customers;
+import com.datalex.dao.ICustomerDAO;
+import com.datalex.dao.db.DbDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -12,38 +14,45 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class CustomerService {
+    ICustomerDAO customerDAO;
+
+    public CustomerService() {
+        customerDAO = new DbDao();
+    }
 
     @GET
     @Path("/customers")
     public Response getCustomers(){
-        Customers customers =  new Customers();
-        customers.getCustomerList().add(new Customer(1L,"nick", "12@2", "222555"));
-        customers.getCustomerList().add(new Customer(1L,"nick", "12@2", "222555"));
+       Customers customers = customerDAO.getAllCustomers();
         return Response.ok(customers).build();
     }
 
     @GET
     @Path("{customerId}")
     public Response getCustomerById(@PathParam("customerId") Long customerId){
-        System.out.println("get");
-        System.out.println(customerId);
-        return Response.ok(new Customer(1L,"nick","12@2","222555")).build();
+        Customer customer = customerDAO.getCustomerById(customerId);
+        return Response.ok(customer).build();
     }
 
     @DELETE
     @Path("{customerId}" )
-
     public Response deleteCustomer(@PathParam("customerId") Long customerId){
-        System.out.println("delete");
-        System.out.println(customerId);
+        customerDAO.deleteCustomer(customerId);
         return Response.noContent().build();
+    }
+
+    @PUT
+    @Path("{customerId}" )
+    public Response updateCustomer(@PathParam("customerId") Long customerId,Customer customer){
+        customer.setID(customerId);
+        customerDAO.updateCustomerById(customer);
+        return Response.ok(customer).build();
     }
 
     @POST
     public Response createCustomer(Customer customer){
-        System.out.println("create");
-        System.out.println(customer);
-       return Response.ok().build();
+        customer = customerDAO.createCustomer(customer);
+       return Response.ok(customer).build();
     }
 
 }
